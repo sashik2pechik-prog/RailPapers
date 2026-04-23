@@ -3,359 +3,427 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RailPaper | Dead Rails Speedrun Archive</title>
+    <title>RailPapers | Global Records</title>
     <style>
-        /* Dark Theme & Typography */
+        /* RETRO DARK THEME */
         :root {
-            --bg-color: #111111;
-            --paper-color: #1e1e1e;
-            --text-color: #e0e0e0;
-            --accent-color: #c0392b; /* Rusty Red */
-            --accent-hover: #e74c3c;
-            --table-border: #333333;
-            --table-header: #0a0a0a;
-            --table-row-alt: #181818;
+            --bg-main: #0a0a0c;
+            --bg-panel: #141518;
+            --border-color: #333;
+            --text-main: #e0e0e0;
+            --accent-rust: #c24a27;
+            --accent-gold: #d4af37;
+            --hover-bg: #1f2025;
         }
 
         body {
-            font-family: 'Courier New', Courier, monospace;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            font-family: 'Courier New', Courier, monospace; /* Old school style */
+            background-color: var(--bg-main);
+            color: var(--text-main);
             margin: 0;
-            padding: 20px;
+            padding: 0;
             line-height: 1.6;
         }
 
         .container {
             max-width: 1100px;
             margin: 0 auto;
-            background-color: var(--paper-color);
-            padding: 30px;
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
-            border: 1px solid #333;
+            padding: 20px;
         }
 
-        /* Header */
+        /* SVG ICONS (Hidden definitions) */
+        .svg-defs { display: none; }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        /* TOP NAVIGATION */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--bg-panel);
+            padding: 15px 20px;
+            border-bottom: 2px solid var(--accent-rust);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 0px rgba(194, 74, 39, 0.5);
+        }
+
+        .nav-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .search-input {
+            background-color: var(--bg-main);
+            color: white;
+            border: 1px solid var(--border-color);
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1rem;
+            width: 250px;
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+        }
+
+        .discord-btn {
+            background-color: #5865F2; /* Discord Color */
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .discord-btn:hover {
+            background-color: #4752c4;
+        }
+
+        /* HEADER */
         header {
             text-align: center;
-            border-bottom: 4px double var(--table-border);
-            margin-bottom: 30px;
-            padding-bottom: 15px;
+            margin: 50px 0;
         }
 
         h1 {
             font-size: 3.5rem;
             margin: 0;
-            color: var(--accent-color);
+            color: var(--accent-gold);
             text-transform: uppercase;
-            letter-spacing: 6px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        .subtitle {
-            font-style: italic;
+        p.subtitle {
+            color: #888;
             font-size: 1.2rem;
-            color: #aaa;
+            margin-top: 5px;
         }
 
-        .header-info {
-            font-size: 0.9rem;
-            color: #777;
-            margin-top: 10px;
+        /* FILTERS (WORKING BUTTONS) */
+        .filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+            background-color: var(--bg-panel);
+            padding: 15px;
+            border: 1px solid var(--border-color);
         }
 
-        /* Discord Button */
-        .discord-wrapper {
-            text-align: center;
-            margin: 20px 0;
+        .filter-btn {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
         }
 
-        .discord-btn {
-            display: inline-block;
-            background-color: #5865F2; /* Discord Brand Color */
+        .filter-btn:hover {
+            background-color: var(--hover-bg);
+            border-color: var(--accent-gold);
+        }
+
+        .filter-btn.active {
+            background-color: var(--accent-rust);
             color: white;
-            padding: 12px 25px;
-            text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border-radius: 5px;
-            transition: 0.3s;
-            text-transform: uppercase;
-            box-shadow: 0px 4px 10px rgba(88, 101, 242, 0.4);
+            border-color: var(--accent-rust);
         }
 
-        .discord-btn:hover {
-            background-color: #4752C4;
+        /* TABLE */
+        .table-container {
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-panel);
         }
 
-        /* Categories / Game Modes */
-        .category-section {
-            margin-bottom: 50px;
-        }
-
-        .category-title {
-            font-size: 2rem;
-            border-left: 5px solid var(--accent-color);
-            padding-left: 15px;
-            margin-bottom: 15px;
-            background: linear-gradient(90deg, #2a0808 0%, transparent 100%);
-        }
-
-        .category-desc {
-            font-size: 0.95rem;
-            color: #999;
-            margin-bottom: 15px;
-        }
-
-        /* Tables */
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 1.1rem;
-        }
-
-        th, td {
-            border: 1px solid var(--table-border);
-            padding: 12px;
             text-align: left;
         }
 
         th {
-            background-color: var(--table-header);
-            color: var(--accent-color);
+            background-color: #000;
+            color: var(--accent-gold);
+            padding: 15px;
+            border-bottom: 2px solid var(--border-color);
             text-transform: uppercase;
-            font-weight: bold;
         }
 
-        tr:nth-child(even) {
-            background-color: var(--table-row-alt);
-        }
-
-        tr:hover {
-            background-color: #2a2a2a;
-        }
-
-        a {
-            color: #3498db;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-            color: #5dade2;
-        }
-
-        .rank-1 {
-            color: #f1c40f;
-            font-weight: bold;
-        }
-        .rank-2 {
-            color: #bdc3c7;
-            font-weight: bold;
-        }
-        .rank-3 {
-            color: #cd7f32;
-            font-weight: bold;
-        }
-
-        .tag-wr {
-            background-color: var(--accent-color);
-            color: white;
-            padding: 3px 6px;
-            font-size: 0.8rem;
-            border-radius: 3px;
-            margin-left: 10px;
+        td {
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
             vertical-align: middle;
         }
 
-        /* Footer */
-        footer {
+        tr:hover {
+            background-color: var(--hover-bg);
+        }
+
+        /* PLAYER STYLES */
+        .player-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 5px;
+            border: 1px solid #555;
+            background-color: #222;
+        }
+
+        .player-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .wr-badge {
+            background-color: var(--accent-rust);
+            color: white;
+            padding: 2px 6px;
+            font-size: 0.75rem;
+            margin-left: 10px;
+            border-radius: 3px;
+        }
+
+        .time {
+            font-size: 1.3rem;
+            color: var(--accent-gold);
+            font-weight: bold;
+        }
+
+        .proof-link {
+            color: #4da6ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .proof-link:hover {
+            text-decoration: underline;
+            color: #80c1ff;
+        }
+
+        .no-results {
             text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid var(--table-border);
-            color: #666;
+            padding: 30px;
+            color: #888;
+            font-style: italic;
+            display: none;
         }
     </style>
 </head>
 <body>
 
+<svg class="svg-defs">
+    <symbol id="icon-discord" viewBox="0 0 24 24">
+        <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189z"/>
+    </symbol>
+    <symbol id="icon-rifle" viewBox="0 0 24 24">
+        <path d="M22,10 L18,10 L16,12 L10,12 L8,10 L2,10 L2,14 L6,14 L6,18 L10,18 L10,14 L18,14 L20,12 L22,12 Z"/>
+    </symbol>
+    <symbol id="icon-duo" viewBox="0 0 24 24">
+        <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+    </symbol>
+    <symbol id="icon-trio" viewBox="0 0 24 24">
+        <path d="M12 11c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm-6-2c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm12 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-6 3c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm-8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19H2v-2.5C2 14.17 6.67 13 9 13zm12 0c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+    </symbol>
+    <symbol id="icon-notrain" viewBox="0 0 24 24">
+        <path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7"/>
+    </symbol>
+    <symbol id="icon-any" viewBox="0 0 24 24">
+        <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/><path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+    </symbol>
+    <symbol id="icon-glitchless" viewBox="0 0 24 24">
+        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+    </symbol>
+</svg>
+
+<div class="top-nav">
+    <a href="#" class="logo">RAILPAPERS</a>
+    <div class="nav-controls">
+        <input type="text" id="searchInput" class="search-input" placeholder="> Search player...">
+        <a href="https://discord.gg/YOUR_INVITE_LINK" target="_blank" class="discord-btn">
+            <svg class="icon"><use href="#icon-discord"></use></svg> DISCORD
+        </a>
+    </div>
+</div>
+
 <div class="container">
     <header>
-        <h1>RAIL PAPER</h1>
-        <div class="subtitle">The Dark Archives of Dead Rails Speedrunners</div>
-        <div class="header-info">Classified Records | Dark Edition | Status: Online</div>
+        <h1>Global Leaderboards</h1>
+        <p class="subtitle">Dead Rails Speedrun Database</p>
     </header>
 
-    <div class="discord-wrapper">
-        <a href="https://discord.gg/QJwPFb6PcG" class="discord-btn" target="_blank">JOIN OUR DISCORD</a>
-        <p style="color: #aaa; font-size: 0.9rem;">Submit your runs, find a squad, and discuss strategies!</p>
+    <div class="filters" id="filterContainer">
+        <button class="filter-btn active" data-filter="all">All Runs</button>
+        <button class="filter-btn" data-filter="Starter Kit">
+            <svg class="icon"><use href="#icon-rifle"></use></svg> Starter Kit
+        </button>
+        <button class="filter-btn" data-filter="Duo">
+            <svg class="icon"><use href="#icon-duo"></use></svg> Duo
+        </button>
+        <button class="filter-btn" data-filter="Trio">
+            <svg class="icon"><use href="#icon-trio"></use></svg> Trio
+        </button>
+        <button class="filter-btn" data-filter="No Train">
+            <svg class="icon"><use href="#icon-notrain"></use></svg> No Train
+        </button>
+        <button class="filter-btn" data-filter="Any%">
+            <svg class="icon"><use href="#icon-any"></use></svg> Any%
+        </button>
+        <button class="filter-btn" data-filter="Glitchless">
+            <svg class="icon"><use href="#icon-glitchless"></use></svg> Glitchless
+        </button>
     </div>
 
-    <main>
-        <section class="category-section">
-            <h2 class="category-title">Any%</h2>
-            <div class="category-desc">Reach the end as fast as possible. All strategies and exploits allowed.</div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Rank</th>
-                        <th>Runner</th>
-                        <th>Time</th>
-                        <th>Proof (VOD)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="rank-1">1st</td>
-                        <td>Luc <span class="tag-wr">WR</span></td>
-                        <td>02:53</td>
-                        <td><a href="https://www.youtube.com/watch?v=UsbSbwVwshg" target="_blank">Watch Video</a></td>
-                    </tr>
-                    <tr>
-                        <td class="rank-2">2nd</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
+    <div class="table-container">
+        <table id="leaderboardTable">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Player</th>
+                    <th>Time</th>
+                    <th>Category</th>
+                    <th>Train</th>
+                    <th>Mode</th>
+                    <th>Proof</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                
+                <tr class="run-row" data-category="No Train" data-mode="Any%">
+                    <td style="font-size: 1.5rem; font-weight: bold; color: var(--accent-rust);">1</td>
+                    <td>
+                        <div class="player-info">
+                            <img src="https://tr.rbxcdn.com/38c6edcb50633730ff4cf39ac8859840/150/150/AvatarHeadshot/Png" alt="Avatar" class="avatar">
+                            <div>
+                                <span class="player-name">Luc</span>
+                                <span class="wr-badge">WR</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="time">02:53.12</td>
+                    <td>
+                        <svg class="icon"><use href="#icon-notrain"></use></svg> No Train
+                    </td>
+                    <td>None</td>
+                    <td>
+                        <svg class="icon"><use href="#icon-any"></use></svg> Any%
+                    </td>
+                    <td>
+                        <a href="https://www.youtube.com/watch?v=UsbSbwVwshg" target="_blank" class="proof-link">Watch Video</a>
+                    </td>
+                </tr>
+
                 </tbody>
-            </table>
-        </section>
-
-        <section class="category-section">
-            <h2 class="category-title">Start Kit</h2>
-            <div class="category-desc">Allowed items before start: 2 Coal, 1 Rifle, 1 Bandage, 2 Med Ammo Packs. No other items.</div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Rank</th>
-                        <th>Runner</th>
-                        <th>Time</th>
-                        <th>Proof (VOD)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="rank-1">1st</td>
-                        <td>BrosClanYt <span class="tag-wr">WR</span></td>
-                        <td>19:23</td>
-                        <td><a href="https://www.youtube.com/watch?v=UvddcXggkhE" target="_blank">Watch Video</a></td>
-                    </tr>
-                    <tr>
-                        <td class="rank-2">2nd</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <section class="category-section">
-            <h2 class="category-title">Bugless (Glitchless)</h2>
-            <div class="category-desc">No exploits, no glitches, no out-of-bounds. Pure gameplay.</div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Rank</th>
-                        <th>Runner</th>
-                        <th>Time</th>
-                        <th>Proof (VOD)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="rank-1">1st</td>
-                        <td>Melon and Sunny <span class="tag-wr">WR</span></td>
-                        <td>26:00</td>
-                        <td><a href="https://www.youtube.com/watch?v=4NlxOZB9b7w" target="_blank">Watch Video</a></td>
-                    </tr>
-                    <tr>
-                        <td class="rank-2">2nd</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <section class="category-section">
-            <h2 class="category-title">DUO</h2>
-            <div class="category-desc">Teams of exactly 2 players. Coordination is key.</div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Rank</th>
-                        <th>Runners</th>
-                        <th>Time</th>
-                        <th>Proof (VOD)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>-</td>
-                        <td>Waiting for submissions...</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <section class="category-section">
-            <h2 class="category-title">TRIO</h2>
-            <div class="category-desc">Teams of exactly 3 players. Maximize efficiency.</div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Rank</th>
-                        <th>Runners</th>
-                        <th>Time</th>
-                        <th>Proof (VOD)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>-</td>
-                        <td>Waiting for submissions...</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <section class="category-section">
-            <h2 class="category-title">Without Train</h2>
-            <div class="category-desc">The ultimate survival challenge. No train allowed. On foot only.</div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Rank</th>
-                        <th>Runner</th>
-                        <th>Time / Distance</th>
-                        <th>Proof (VOD)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>-</td>
-                        <td>Waiting for submissions...</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-    </main>
-
-    <footer>
-        <p>&copy; 2026 RailPaper. The Official Dead Rails Speedrun Hub.</p>
-        <p>Submit your times in our Discord server.</p>
-    </footer>
+        </table>
+        <div id="noResults" class="no-results">
+            [ ERROR 404: Conductor not found ]
+        </div>
+    </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const searchInput = document.getElementById('searchInput');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const tableRows = document.querySelectorAll('.run-row');
+        const noResultsMessage = document.getElementById('noResults');
+        const tableElement = document.getElementById('leaderboardTable');
+
+        let currentSearch = '';
+        let currentFilter = 'all';
+
+        // Function to update the table display
+        function applyFilters() {
+            let visibleCount = 0;
+
+            tableRows.forEach(row => {
+                const playerName = row.querySelector('.player-name').textContent.toLowerCase();
+                const category = row.getAttribute('data-category');
+                const mode = row.getAttribute('data-mode');
+
+                // Check if row matches search text
+                const matchesSearch = playerName.includes(currentSearch);
+                
+                // Check if row matches filter button
+                const matchesFilter = (currentFilter === 'all') || 
+                                      (category === currentFilter) || 
+                                      (mode === currentFilter);
+
+                if (matchesSearch && matchesFilter) {
+                    row.style.display = '';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            // Show or hide the table header and "No Results" message
+            if (visibleCount === 0) {
+                tableElement.style.display = 'none';
+                noResultsMessage.style.display = 'block';
+            } else {
+                tableElement.style.display = 'table';
+                noResultsMessage.style.display = 'none';
+            }
+        }
+
+        // 1. Search Bar Event Listener
+        searchInput.addEventListener('input', (e) => {
+            currentSearch = e.target.value.toLowerCase().trim();
+            applyFilters();
+        });
+
+        // 2. Filter Buttons Event Listener
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                
+                // Add active class to clicked button
+                const clickedBtn = e.currentTarget;
+                clickedBtn.classList.add('active');
+
+                // Get filter data and apply
+                currentFilter = clickedBtn.getAttribute('data-filter');
+                applyFilters();
+            });
+        });
+    });
+</script>
 
 </body>
 </html>
