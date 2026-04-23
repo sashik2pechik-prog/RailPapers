@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RailPaper | Dead Rails Speedrun Archive</title>
+    <style>
+        /* Dark Theme & Typography */
+        :root {
+            --bg-color: #111111;
+            --paper-color: #1e1e1e;
+            --text-color: #e0e0e0;
+            --accent-color: #c0392b; /* Rusty Red */
+            --accent-hover: #e74c3c;
+            --table-border: #333333;
+            --table-header: #0a0a0a;
+            --table-row-alt: #181818;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: var(--paper-color);
+            padding: 30px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
+            border: 1px solid #333;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            border-bottom: 4px double var(--table-border);
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .subtitle {
+            font-style: italic;
+            font-size: 1.2rem;
+            color: #aaa;
+        }
+
+        .header-info {
+            font-size: 0.9rem;
+            color: #777;
+            margin-top: 10px;
+        }
+
+        /* Discord Button */
+        .discord-wrapper {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .discord-btn {
+            display: inline-block;
+            background-color: #5865F2; /* Discord Brand Color */
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: 0.3s;
+            text-transform: uppercase;
+            box-shadow: 0px 4px 10px rgba(88, 101, 242, 0.4);
+        }
+
+        .discord-btn:hover {
+            background-color: #4752C4;
+        }
+
+        /* Categories / Game Modes */
+        .category-section {
+            margin-bottom: 50px;
+        }
+
+        .category-title {
+            font-size: 2rem;
+            border-left: 5px solid var(--accent-color);
+            padding-left: 15px;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #2a0808 0%, transparent 100%);
+        }
+
+        .category-desc {
+            font-size: 0.95rem;
+            color: #999;
+            margin-bottom: 15px;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 1.1rem;
+        }
+
+        th, td {
+            border: 1px solid var(--table-border);
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--table-header);
+            color: var(--accent-color);
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: var(--table-row-alt);
+        }
+
+        tr:hover {
+            background-color: #2a2a2a;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #5dade2;
+        }
+
+        .rank-1 {
+            color: #f1c40f;
+            font-weight: bold;
+        }
+        .rank-2 {
+            color: #bdc3c7;
+            font-weight: bold;
+        }
+        .rank-3 {
+            color: #cd7f32;
+            font-weight: bold;
+        }
+
+        .tag-wr {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 3px 6px;
+            font-size: 0.8rem;
+            border-radius: 3px;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--table-border);
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>RAIL PAPER</h1>
+        <div class="subtitle">The Dark Archives of Dead Rails Speedrunners</div>
+        <div class="header-info">Classified Records | Dark Edition | Status: Online</div>
+    </header>
+
+    <div class="discord-wrapper">
+        <a href="https://discord.gg/QJwPFb6PcG" class="discord-btn" target="_blank">JOIN OUR DISCORD</a>
+        <p style="color: #aaa; font-size: 0.9rem;">Submit your runs, find a squad, and discuss strategies!</p>
+    </div>
+
+    <main>
+        <section class="category-section">
+            <h2 class="category-title">Any%</h2>
+            <div class="category-desc">Reach the end as fast as possible. All strategies and exploits allowed.</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Runner</th>
+                        <th>Time</th>
+                        <th>Proof (VOD)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="rank-1">1st</td>
+                        <td>Luc <span class="tag-wr">WR</span></td>
+                        <td>02:53</td>
+                        <td><a href="https://www.youtube.com/watch?v=UsbSbwVwshg" target="_blank">Watch Video</a></td>
+                    </tr>
+                    <tr>
+                        <td class="rank-2">2nd</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="category-section">
+            <h2 class="category-title">Start Kit</h2>
+            <div class="category-desc">Allowed items before start: 2 Coal, 1 Rifle, 1 Bandage, 2 Med Ammo Packs. No other items.</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Runner</th>
+                        <th>Time</th>
+                        <th>Proof (VOD)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="rank-1">1st</td>
+                        <td>BrosClanYt <span class="tag-wr">WR</span></td>
+                        <td>19:23</td>
+                        <td><a href="https://www.youtube.com/watch?v=UvddcXggkhE" target="_blank">Watch Video</a></td>
+                    </tr>
+                    <tr>
+                        <td class="rank-2">2nd</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="category-section">
+            <h2 class="category-title">Bugless (Glitchless)</h2>
+            <div class="category-desc">No exploits, no glitches, no out-of-bounds. Pure gameplay.</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Runner</th>
+                        <th>Time</th>
+                        <th>Proof (VOD)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="rank-1">1st</td>
+                        <td>Melon and Sunny <span class="tag-wr">WR</span></td>
+                        <td>26:00</td>
+                        <td><a href="https://www.youtube.com/watch?v=4NlxOZB9b7w" target="_blank">Watch Video</a></td>
+                    </tr>
+                    <tr>
+                        <td class="rank-2">2nd</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="category-section">
+            <h2 class="category-title">DUO</h2>
+            <div class="category-desc">Teams of exactly 2 players. Coordination is key.</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Runners</th>
+                        <th>Time</th>
+                        <th>Proof (VOD)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>-</td>
+                        <td>Waiting for submissions...</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="category-section">
+            <h2 class="category-title">TRIO</h2>
+            <div class="category-desc">Teams of exactly 3 players. Maximize efficiency.</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Runners</th>
+                        <th>Time</th>
+                        <th>Proof (VOD)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>-</td>
+                        <td>Waiting for submissions...</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="category-section">
+            <h2 class="category-title">Without Train</h2>
+            <div class="category-desc">The ultimate survival challenge. No train allowed. On foot only.</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Runner</th>
+                        <th>Time / Distance</th>
+                        <th>Proof (VOD)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>-</td>
+                        <td>Waiting for submissions...</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 RailPaper. The Official Dead Rails Speedrun Hub.</p>
+        <p>Submit your times in our Discord server.</p>
+    </footer>
+</div>
+
+</body>
+</html>
